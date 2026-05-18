@@ -301,12 +301,13 @@ function trySpawnMetaclaw(api: OpenClawPluginApi, full: MetaClawPluginConfig, ve
   // Use venv Python for metaclaw unless user set a custom command
   const cmd = full.metaclawCommand;
   const args = full.metaclawStartArgs;
+  const needsShell = process.platform === "win32" && /\.(bat|cmd)$/i.test(cmd);
 
   try {
     const child = spawn(cmd, args, {
       detached: true,
       stdio: "ignore",
-      shell: process.platform === "win32",
+      shell: needsShell,
     });
     child.on("error", (err) => {
       api.logger.warn(`metaclaw-openclaw: spawn MetaClaw failed (${String(err)}).`);
@@ -496,7 +497,7 @@ function runVenvSetupThenMaybeStart(api: OpenClawPluginApi, full: MetaClawPlugin
   api.logger.info(installedVersion ? "metaclaw-openclaw: upgrading…" : "metaclaw-openclaw: installing…");
 
   const pip = spawn(venvPy, args, {
-    shell: process.platform === "win32",
+    shell: false,
     stdio: ["ignore", "pipe", "pipe"],
     env: { ...process.env, PYTHONUNBUFFERED: "1" },
   });
