@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 import logging
+import shutil
 import subprocess
 from pathlib import Path
 from typing import TYPE_CHECKING, Callable
@@ -370,8 +371,11 @@ def _run_commands(
 ) -> None:
     for cmd in commands:
         try:
+            resolved = shutil.which(cmd[0])
+            if resolved is None:
+                raise FileNotFoundError(cmd[0])
             result = subprocess.run(
-                cmd,
+                [resolved, *cmd[1:]],
                 capture_output=True,
                 text=True,
                 timeout=15,
