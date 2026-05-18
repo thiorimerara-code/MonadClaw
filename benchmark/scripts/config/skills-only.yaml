@@ -20,3 +20,4 @@ skills:
   retrieval_mode: template
   task_specific_top_k: 10
   top_k: 6
+max_context_tokens: 50000

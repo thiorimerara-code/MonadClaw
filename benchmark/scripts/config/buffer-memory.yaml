@@ -33,3 +33,4 @@ memory:
   ignore_turn_type: true
   manual_trigger: true
   flush_every: 3
+max_context_tokens: 50000

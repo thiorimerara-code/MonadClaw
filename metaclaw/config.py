@@ -96,7 +96,7 @@ class MetaClawConfig:
     # ------------------------------------------------------------------ #
     # Context window                                                       #
     # ------------------------------------------------------------------ #
-    max_context_tokens: int = 20000            # hard cap on prompt token count; must match
+    max_context_tokens: int = 50000            # hard cap on prompt token count; must match
                                               # Tinker's max_seq_len minus headroom for response
 
     # ------------------------------------------------------------------ #

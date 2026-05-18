@@ -32,3 +32,4 @@ memory:
   max_injected_tokens: 1500
   ignore_turn_type: true
   manual_trigger: true
+max_context_tokens: 50000
