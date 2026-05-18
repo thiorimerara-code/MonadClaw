@@ -7,10 +7,11 @@ import { spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
 
 /** Directory where this plugin lives — the .venv is created here. */
-const PLUGIN_DIR = path.dirname(new URL(import.meta.url).pathname);
+const PLUGIN_DIR = path.dirname(fileURLToPath(import.meta.url));
 
 /** Guard: prevent register() from running install logic more than once per process. */
 let _registered = false;
